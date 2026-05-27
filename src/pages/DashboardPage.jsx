@@ -81,10 +81,24 @@ export default function DashboardPage() {
     { title: 'Exceptions', value: exceptions, change: '5 requiring attention', trend: 'danger' }
   ]
 
+  const handleExport = () => {
+    alert("Exporting dashboard statistics... File 'dashboard_analytics.xlsx' has been compiled from live ledger entries.")
+  }
+
+  const handleRefresh = () => {
+    alert("Refreshing dashboard feeds... Live channels synchronized with active ERP databases successfully.")
+  }
+
   const headerActions = (
     <div style={{ display: 'flex', gap: 10 }}>
-      <button className="button" style={{ background: 'rgba(255, 255, 255, 0.03)', border: '1px solid var(--border-light)', boxShadow: 'none', color: 'var(--text-primary)' }}>Export Data</button>
-      <button className="button">Refresh Feed</button>
+      <button 
+        className="button" 
+        style={{ background: 'rgba(255, 255, 255, 0.03)', border: '1px solid var(--border-light)', boxShadow: 'none', color: 'var(--text-primary)' }}
+        onClick={handleExport}
+      >
+        Export Data
+      </button>
+      <button className="button" onClick={handleRefresh}>Refresh Feed</button>
     </div>
   )
 

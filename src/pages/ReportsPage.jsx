@@ -22,7 +22,7 @@ export default function ReportsPage() {
       doc.setFont('Helvetica', 'bold')
       doc.setFontSize(22)
       doc.setTextColor(255, 255, 255)
-      doc.text('AutoFlow AI', 15, 18)
+      doc.text('OpsHub', 15, 18)
       
       doc.setFont('Helvetica', 'normal')
       doc.setFontSize(10)
@@ -119,7 +119,7 @@ export default function ReportsPage() {
       // 5. Footer Stamp
       doc.setFontSize(8)
       doc.setTextColor(148, 163, 184)
-      doc.text('AutoFlow AI Systems compliance lock code: AF-SHA-256-LEDGER-SECURE-ID-99.', 105, 282, { align: 'center' })
+      doc.text('OpsHub Systems compliance lock code: OH-SHA-256-LEDGER-SECURE-ID-99.', 105, 282, { align: 'center' })
       doc.text('Page 1 of 1', 195, 282, { align: 'right' })
       
       doc.save(`reconciliation-report-${Date.now()}.pdf`)

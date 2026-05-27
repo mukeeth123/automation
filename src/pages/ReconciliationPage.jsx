@@ -13,7 +13,22 @@ function scoreMatch(inv) {
 
 export default function ReconciliationPage() {
   const [items] = useState(() => mockInvoices.slice(0, 80))
-  const [selected, setSelected] = useState(null)
+  const [selected, setSelected] = useState(() => {
+    // Default select the first item so the view is populated immediately and beautifully
+    const first = mockInvoices[0]
+    const r = scoreMatch(first)
+    return {
+      inv: first,
+      analysis: r,
+      recommendation: r.status === 'Matched' 
+        ? 'Fully reconciled. No manual action required.' 
+        : r.status === 'Duplicate'
+          ? 'Mark duplicate, cancel transaction and notify vendor.'
+          : r.status === 'Partial Match'
+            ? 'Verify PO lines and manually adjust variances.'
+            : 'Escalate to vendor manager: no matching ERP ledger record found.'
+    }
+  })
   const [syncing, setSyncing] = useState(null)
 
   const runMatch = (inv) => {
@@ -37,6 +52,7 @@ export default function ReconciliationPage() {
     setTimeout(() => {
       setSyncing(null)
       addAudit(`ERP Sync triggered: ${name}`, 'Admin')
+      alert(`Ledger sync completed for ${name} database. All tables updated successfully.`)
     }, 1200)
   }
 
@@ -66,22 +82,31 @@ export default function ReconciliationPage() {
                       onClick={() => runMatch(i)}
                       style={{ 
                         cursor: 'pointer',
-                        background: isSelected ? 'rgba(59, 130, 246, 0.06)' : 'transparent'
+                        background: isSelected ? 'rgba(59, 130, 246, 0.12)' : 'transparent',
+                        borderLeft: isSelected ? '4px solid #3b82f6' : '4px solid transparent',
+                        transition: 'all 150ms'
                       }}
                     >
-                      <td style={{ fontWeight: 700 }}>{i.id}</td>
+                      <td style={{ fontWeight: 700, paddingLeft: isSelected ? 14 : 18 }}>{i.id}</td>
                       <td>{i.vendorId}</td>
                       <td>{i.currency} {i.amount.toLocaleString()}</td>
                       <td>
                         <button 
                           className="button" 
-                          style={{ padding: '6px 12px', fontSize: '11px' }}
-                          onClick={(e) => {
-                            e.stopPropagation();
+                          style={{ 
+                            padding: '6px 12px', 
+                            fontSize: '11px',
+                            background: isSelected ? 'linear-gradient(90deg, #10b981, #059669)' : 'var(--accent-gradient)',
+                            border: 'none',
+                            color: '#fff',
+                            borderRadius: 4
+                          }}
+                          onClick={(evt) => {
+                            evt.stopPropagation();
                             runMatch(i);
                           }}
                         >
-                          Compare
+                          {isSelected ? 'Active' : 'Compare'}
                         </button>
                       </td>
                     </tr>
@@ -147,9 +172,9 @@ export default function ReconciliationPage() {
                           {selected.analysis.score}%
                         </span>
                       </div>
-                    </div>
+                    </div>Base
 
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, padding: 12, background: 'rgba(0,0,0,0.1)', borderRadius: 8, border: '1px solid var(--border-light)' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, padding: 12, background: 'rgba(0,0,0,0.15)', borderRadius: 8, border: '1px solid var(--border-light)' }}>
                       <div>
                         <div style={{ fontSize: 10, color: 'var(--text-muted)', textTransform: 'uppercase' }}>Invoice Document</div>
                         <div style={{ fontWeight: 700, marginTop: 4, fontSize: 12 }}>INR {selected.inv.amount.toLocaleString()}</div>

@@ -6,8 +6,8 @@ export function useNotifications() {
 
   useEffect(() => {
     const refresh = () => setNotifications(getNotifications())
-    window.addEventListener('autoflow_notifications_updated', refresh)
-    return () => window.removeEventListener('autoflow_notifications_updated', refresh)
+    window.addEventListener('opshub_notifications_updated', refresh)
+    return () => window.removeEventListener('opshub_notifications_updated', refresh)
   }, [])
 
   const add = useCallback((title, body, level = 'info') => {

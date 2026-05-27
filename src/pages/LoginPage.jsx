@@ -61,7 +61,7 @@ export default function LoginPage() {
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
             <div style={{ width: 36, height: 36, background: 'var(--accent-gradient)', borderRadius: 8, boxShadow: '0 0 16px rgba(59, 130, 246, 0.4)' }} />
             <div>
-              <div style={{ fontWeight: 800, fontSize: 18, color: '#fff', letterSpacing: '-0.02em' }}>AutoFlow AI</div>
+              <div style={{ fontWeight: 800, fontSize: 18, color: '#fff', letterSpacing: '-0.02em' }}>OpsHub</div>
               <div style={{ fontSize: 11, color: 'var(--text-muted)' }}>Enterprise Ingestion Suite</div>
             </div>
           </div>

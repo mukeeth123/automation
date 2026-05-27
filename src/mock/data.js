@@ -1,4 +1,4 @@
-// Mock data generator for AutoFlow AI demo
+// Mock data generator for OpsHub demo
 import { DEMO_CREDENTIALS, ERP_SYSTEMS, EMAIL_CATEGORIES, DOC_CATEGORIES, INVOICE_STATUS } from '../constants'
 
 function rand(seed) {
@@ -54,8 +54,8 @@ function makeInvoices(n = 500) {
 function makeEmails(n = 24) {
   return Array.from({ length: n }).map((_, i) => ({
     id: `EMAIL-${2000 + i}`,
-    from: i % 2 === 0 ? 'vendor@partner.com' : 'procure@autoflow.ai',
-    to: i % 2 === 0 ? 'finance@autoflow.ai' : 'vendor@partner.com',
+    from: i % 2 === 0 ? 'vendor@partner.com' : 'procure@opshub.ai',
+    to: i % 2 === 0 ? 'finance@opshub.ai' : 'vendor@partner.com',
     subject: `${EMAIL_CATEGORIES[i % EMAIL_CATEGORIES.length]} for INV-${1010 + i}`,
     status: i % 5 === 0 ? 'Sent' : 'Pending',
     timestamp: new Date(Date.now() - i * 3600000).toISOString(),

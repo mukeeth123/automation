@@ -6,7 +6,11 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 export default function ApprovalsPage() {
   const [queue, setQueue] = useState(() => mockInvoices.filter(i => i.status === 'Pending Approval').slice(0, 40))
-  const [selected, setSelected] = useState(null)
+  const [selected, setSelected] = useState(() => {
+    // Default select the first pending approval item so the view is populated immediately
+    const pendingList = mockInvoices.filter(i => i.status === 'Pending Approval')
+    return pendingList.length > 0 ? pendingList[0] : null
+  })
 
   const handleAction = (id, action) => {
     setQueue(prev => prev.filter(x => x.id !== id))
@@ -17,6 +21,7 @@ export default function ApprovalsPage() {
 
   // Determine priority badge
   const isHighPriority = (item) => {
+    if (!item) return false
     return item.amount > 500000 || item.confidence < 80
   }
 
@@ -51,10 +56,12 @@ export default function ApprovalsPage() {
                       onClick={() => setSelected(i)}
                       style={{ 
                         cursor: 'pointer',
-                        background: isSelected ? 'rgba(59, 130, 246, 0.06)' : 'transparent'
+                        background: isSelected ? 'rgba(59, 130, 246, 0.12)' : 'transparent',
+                        borderLeft: isSelected ? '4px solid #3b82f6' : '4px solid transparent',
+                        transition: 'all 150ms'
                       }}
                     >
-                      <td style={{ fontWeight: 700 }}>{i.id}</td>
+                      <td style={{ fontWeight: 700, paddingLeft: isSelected ? 14 : 18 }}>{i.id}</td>
                       <td>{i.vendorId}</td>
                       <td>{i.currency} {i.amount.toLocaleString()}</td>
                       <td>
@@ -65,13 +72,20 @@ export default function ApprovalsPage() {
                       <td>
                         <button 
                           className="button" 
-                          style={{ padding: '6px 12px', fontSize: '11px' }}
-                          onClick={(e) => {
-                            e.stopPropagation()
+                          style={{ 
+                            padding: '6px 12px', 
+                            fontSize: '11px',
+                            background: isSelected ? 'linear-gradient(90deg, #10b981, #059669)' : 'var(--accent-gradient)',
+                            border: 'none',
+                            color: '#fff',
+                            borderRadius: 4
+                          }}
+                          onClick={(evt) => {
+                            evt.stopPropagation()
                             setSelected(i)
                           }}
                         >
-                          Verify
+                          {isSelected ? 'Verifying' : 'Verify'}
                         </button>
                       </td>
                     </tr>

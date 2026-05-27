@@ -8,7 +8,11 @@ export default function ExceptionsPage() {
   const [exceptions, setExceptions] = useState(() => 
     mockInvoices.filter(i => i.gstMismatch || i.duplicate || i.status === 'Exception').slice(0, 40)
   )
-  const [selected, setSelected] = useState(null)
+  const [selected, setSelected] = useState(() => {
+    // Select the first conflict by default so the preview drawer is populated immediately
+    const list = mockInvoices.filter(i => i.gstMismatch || i.duplicate || i.status === 'Exception')
+    return list.length > 0 ? list[0] : null
+  })
 
   const handleAction = (id, action) => {
     setExceptions(prev => prev.filter(x => x.id !== id))
@@ -18,6 +22,7 @@ export default function ExceptionsPage() {
   }
 
   const getExceptionType = (item) => {
+    if (!item) return ''
     if (item.duplicate) return 'Duplicate Record'
     if (item.gstMismatch) return 'GST Mismatch'
     return 'Manual Audit Request'
@@ -54,10 +59,12 @@ export default function ExceptionsPage() {
                       onClick={() => setSelected(e)}
                       style={{ 
                         cursor: 'pointer',
-                        background: isSelected ? 'rgba(59, 130, 246, 0.06)' : 'transparent'
+                        background: isSelected ? 'rgba(59, 130, 246, 0.12)' : 'transparent',
+                        borderLeft: isSelected ? '4px solid #3b82f6' : '4px solid transparent',
+                        transition: 'all 150ms'
                       }}
                     >
-                      <td style={{ fontWeight: 700 }}>{e.id}</td>
+                      <td style={{ fontWeight: 700, paddingLeft: isSelected ? 14 : 18 }}>{e.id}</td>
                       <td>{e.vendorId}</td>
                       <td>
                         <span className={`badge ${
@@ -70,13 +77,20 @@ export default function ExceptionsPage() {
                       <td>
                         <button 
                           className="button" 
-                          style={{ padding: '6px 12px', fontSize: '11px' }}
-                          onClick={(e) => {
-                            e.stopPropagation()
+                          style={{ 
+                            padding: '6px 12px', 
+                            fontSize: '11px',
+                            background: isSelected ? 'linear-gradient(90deg, #10b981, #059669)' : 'var(--accent-gradient)',
+                            border: 'none',
+                            color: '#fff',
+                            borderRadius: 4
+                          }}
+                          onClick={(evt) => {
+                            evt.stopPropagation()
                             setSelected(e)
                           }}
                         >
-                          Investigate
+                          {isSelected ? 'Auditing' : 'Investigate'}
                         </button>
                       </td>
                     </tr>
@@ -119,7 +133,7 @@ export default function ExceptionsPage() {
                     </div>
                     <div>
                       <div style={{ color: 'var(--text-muted)', fontSize: 11, textTransform: 'uppercase' }}>GST Number</div>
-                      <div style={{ fontWeight: 600, marginTop: 2 }}>GSTIN{selected.id.split('-')[1]}</div>
+                      <div style={{ fontWeight: 600, marginTop: 2 }}>GSTIN{selected.id.split('-')[1] || '9999'}</div>
                     </div>
                     <div>
                       <div style={{ color: 'var(--text-muted)', fontSize: 11, textTransform: 'uppercase' }}>PO Reference</div>

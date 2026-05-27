@@ -1,4 +1,4 @@
-AutoFlow AI — Frontend-only Enterprise Demo
+OpsHub — Frontend-only Enterprise Demo
 
 Quickstart
 

@@ -20,9 +20,9 @@ export default function EmailAutomationPage() {
     if (!email) return ''
     switch(email.category) {
       case 'Approval Request':
-        return `Hello Vendor Partner,\n\nThis is an automated system notification from AutoFlow AI.\nWe have received your document for processing. Invoice details are currently under internal manager review. No immediate action is required on your side.\n\nStatus: Pending Internal Approval\nInvoice Link: https://autoflow.ai/public/invoice/${email.id}\n\nBest Regards,\nAccounts Payable Team\nAutoFlow AI`
+        return `Hello Vendor Partner,\n\nThis is an automated system notification from OpsHub.\nWe have received your document for processing. Invoice details are currently under internal manager review. No immediate action is required on your side.\n\nStatus: Pending Internal Approval\nInvoice Link: https://opshub.ai/public/invoice/${email.id}\n\nBest Regards,\nAccounts Payable Team\nOpsHub`
       case 'Reminder':
-        return `Dear Partner,\n\nWe would like to remind you that some matching fields or tax details are incomplete. Please log into the portal to review PO Line match suggestions to expedite payment clearance.\n\nBest Regards,\nAutoFlow Operations`
+        return `Dear Partner,\n\nWe would like to remind you that some matching fields or tax details are incomplete. Please log into the portal to review PO Line match suggestions to expedite payment clearance.\n\nBest Regards,\nOpsHub Operations`
       case 'Escalation':
         return `URGENT: Transaction Conflict Warning\n\nTo Whom It May Concern,\n\nInvoice verification has failed due to a duplicate tax submission mismatch. An operator has escalated this dispute. Please provide supporting tax receipt documents as soon as possible.\n\nTicket Ref ID: AP-${email.id}`
       default:
@@ -33,7 +33,7 @@ export default function EmailAutomationPage() {
   // Sync composer input fields with the selected email
   useEffect(() => {
     if (selected) {
-      setEditTo(selected.to === 'vendor@partner.com' || selected.to === 'finance@autoflow.ai' ? 'mukeethr67@gmail.com' : selected.to)
+      setEditTo(selected.to === 'vendor@partner.com' || selected.to === 'finance@opshub.ai' ? 'mukeethr67@gmail.com' : selected.to)
       setEditSubject(selected.subject)
       setEditBody(getEmailBody(selected))
     }
@@ -48,7 +48,7 @@ export default function EmailAutomationPage() {
     
     const next = {
       id: `EMAIL-${Date.now()}`,
-      from: 'procure@autoflow.ai',
+      from: 'procure@opshub.ai',
       to: 'vendor@partner.com',
       subject: `${cat} for INV-${invNum}`,
       status: 'Sent',
@@ -63,7 +63,7 @@ export default function EmailAutomationPage() {
       },
       body: JSON.stringify({
         to: 'mukeethr67@gmail.com',
-        subject: `[AutoFlow] ${cat} for INV-${invNum}`,
+        subject: `[OpsHub] ${cat} for INV-${invNum}`,
         text: getEmailBody(next)
       })
     })
@@ -93,7 +93,7 @@ export default function EmailAutomationPage() {
   // Send an email directly from the ledger item list (manual send option on every mail)
   const sendDirect = (email) => {
     setSendingId(email.id)
-    const targetRecipient = email.to === 'vendor@partner.com' || email.to === 'finance@autoflow.ai' ? 'mukeethr67@gmail.com' : email.to
+    const targetRecipient = email.to === 'vendor@partner.com' || email.to === 'finance@opshub.ai' ? 'mukeethr67@gmail.com' : email.to
 
     fetch('/api/send-email', {
       method: 'POST',
@@ -190,8 +190,8 @@ export default function EmailAutomationPage() {
                     style={{ 
                       padding: 14, 
                       borderRadius: 8,
-                      border: '1px solid var(--border-light)',
-                      background: isSelected ? 'rgba(59, 130, 246, 0.06)' : 'rgba(255,255,255,0.01)',
+                      border: isSelected ? '1px solid #3b82f6' : '1px solid var(--border-light)',
+                      background: isSelected ? 'rgba(59, 130, 246, 0.12)' : 'rgba(255,255,255,0.01)',
                       cursor: 'pointer',
                       transition: 'all 150ms'
                     }}

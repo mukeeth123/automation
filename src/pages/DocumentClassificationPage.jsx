@@ -40,8 +40,8 @@ export default function DocumentClassificationPage() {
                   style={{ 
                     padding: 14, 
                     borderRadius: 8,
-                    border: '1px solid var(--border-light)',
-                    background: isSelected ? 'rgba(59, 130, 246, 0.06)' : 'rgba(255,255,255,0.01)',
+                    border: isSelected ? '1px solid #3b82f6' : '1px solid var(--border-light)',
+                    background: isSelected ? 'rgba(59, 130, 246, 0.12)' : 'rgba(255,255,255,0.01)',
                     cursor: 'pointer',
                     transition: 'all 150ms',
                     display: 'flex',

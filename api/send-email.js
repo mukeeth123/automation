@@ -38,9 +38,9 @@ export default async function handler(req, res) {
 
   try {
     const mailOptions = {
-      from: `"AutoFlow AI" <${fromEmail}>`,
+      from: `"OpsHub" <${fromEmail}>`,
       to: to || process.env.DEFAULT_RECIPIENT || 'mukeethr67@gmail.com',
-      subject: subject || 'AutoFlow AI Notification Alert',
+      subject: subject || 'OpsHub Notification Alert',
       text: text,
       html: html || text.replace(/\n/g, '<br>'),
       attachments: []

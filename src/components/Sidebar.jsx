@@ -94,7 +94,7 @@ export default function Sidebar() {
     <div className="sidebar">
       <NavLink to="/" className="logo">
         <div className="logo-dot" />
-        <span className="brand">AutoFlow AI</span>
+        <span className="brand">OpsHub</span>
       </NavLink>
 
       <nav>

@@ -49,9 +49,9 @@ app.post('/api/send-email', async (req, res) => {
 
   try {
     const mailOptions = {
-      from: `"AutoFlow AI" <${fromEmail}>`,
+      from: `"OpsHub" <${fromEmail}>`,
       to: to || process.env.DEFAULT_RECIPIENT || 'mukeethr67@gmail.com',
-      subject: subject || 'AutoFlow AI Notification Alert',
+      subject: subject || 'OpsHub Notification Alert',
       text: text,
       html: html || text.replace(/\n/g, '<br>'),
       attachments: []
@@ -78,5 +78,5 @@ app.post('/api/send-email', async (req, res) => {
 })
 
 app.listen(PORT, () => {
-  console.log(`AutoFlow AI Mailer backend listening on port ${PORT}`)
+  console.log(`OpsHub Mailer backend listening on port ${PORT}`)
 })

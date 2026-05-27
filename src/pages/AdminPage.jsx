@@ -11,7 +11,7 @@ export default function AdminPage() {
       Array.from({ length: 14 }).map((_, i) => ({
         name: 'User ' + (i + 1),
         role: ['Analyst', 'Finance Manager', 'Vendor Manager'][i % 3],
-        email: `operator${i + 1}@autoflow.ai`,
+        email: `operator${i + 1}@opshub.ai`,
         password: 'Demo@123'
       }))
     )
@@ -65,7 +65,7 @@ export default function AdminPage() {
             </div>
             <div>
               <label style={{ fontSize: 11, color: 'var(--text-secondary)', fontWeight: 600, display: 'block', marginBottom: 4 }}>SENDER EMAIL ACCOUNT</label>
-              <input className="form-input" placeholder="e.g. ap-alerts@autoflow.ai" value={emailConfig.email || ''} onChange={e => setEmailConfig(s => ({ ...s, email: e.target.value }))} />
+              <input className="form-input" placeholder="e.g. ap-alerts@opshub.ai" value={emailConfig.email || ''} onChange={e => setEmailConfig(s => ({ ...s, email: e.target.value }))} />
             </div>
             <div>
               <label style={{ fontSize: 11, color: 'var(--text-secondary)', fontWeight: 600, display: 'block', marginBottom: 4 }}>EMAIL ACCOUNT PASSWORD</label>

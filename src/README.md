@@ -1,4 +1,4 @@
-AutoFlow AI — Frontend-only enterprise demo
+OpsHub — Frontend-only enterprise demo
 
 Run locally:
 

@@ -26,12 +26,12 @@ export const ROLES = {
 
 // Demo credentials
 export const DEMO_CREDENTIALS = [
-  { name: 'CFO User', role: ROLES.CFO, email: 'cfo@autoflow.ai', password: 'Demo@123' },
-  { name: 'Finance Manager', role: ROLES.FINANCE_MANAGER, email: 'finance@autoflow.ai', password: 'Demo@123' },
-  { name: 'Analyst', role: ROLES.ANALYST, email: 'analyst@autoflow.ai', password: 'Demo@123' },
-  { name: 'Vendor Manager', role: ROLES.VENDOR_MANAGER, email: 'vendor@autoflow.ai', password: 'Demo@123' },
-  { name: 'Auditor', role: ROLES.AUDITOR, email: 'auditor@autoflow.ai', password: 'Demo@123' },
-  { name: 'Admin', role: ROLES.ADMIN, email: 'admin@autoflow.ai', password: 'Demo@123' },
+  { name: 'CFO User', role: ROLES.CFO, email: 'cfo@opshub.ai', password: 'Demo@123' },
+  { name: 'Finance Manager', role: ROLES.FINANCE_MANAGER, email: 'finance@opshub.ai', password: 'Demo@123' },
+  { name: 'Analyst', role: ROLES.ANALYST, email: 'analyst@opshub.ai', password: 'Demo@123' },
+  { name: 'Vendor Manager', role: ROLES.VENDOR_MANAGER, email: 'vendor@opshub.ai', password: 'Demo@123' },
+  { name: 'Auditor', role: ROLES.AUDITOR, email: 'auditor@opshub.ai', password: 'Demo@123' },
+  { name: 'Admin', role: ROLES.ADMIN, email: 'admin@opshub.ai', password: 'Demo@123' },
 ]
 
 // Invoice statuses
@@ -87,10 +87,10 @@ export const THEME = {
 
 // Storage keys
 export const STORAGE_KEYS = {
-  SESSION: 'autoflow_session',
-  AUDIT: 'autoflow_audit',
-  NOTIFICATIONS: 'autoflow_notifications',
-  EMAIL_SERVER: 'autoflow_email_server',
+  SESSION: 'opshub_session',
+  AUDIT: 'opshub_audit',
+  NOTIFICATIONS: 'opshub_notifications',
+  EMAIL_SERVER: 'opshub_email_server',
 }
 
 // Notifications config

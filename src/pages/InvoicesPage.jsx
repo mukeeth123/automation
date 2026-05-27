@@ -8,7 +8,7 @@ import jsPDF from 'jspdf'
 
 export default function InvoicesPage() {
   const [invoices, setInvoices] = useState(() => mockInvoices.slice(0, 80))
-  const [selected, setSelected] = useState(null)
+  const [selected, setSelected] = useState(() => mockInvoices[0])
   const [uploading, setUploading] = useState(false)
   const [emailingDoc, setEmailingDoc] = useState(false)
   const [recipientEmail, setRecipientEmail] = useState('mukeethr67@gmail.com')
@@ -66,7 +66,7 @@ export default function InvoicesPage() {
     doc.setFont('Helvetica', 'bold')
     doc.setFontSize(22)
     doc.setTextColor(255, 255, 255)
-    doc.text('AutoFlow AI', 15, 18)
+    doc.text('OpsHub', 15, 18)
     
     doc.setFont('Helvetica', 'normal')
     doc.setFontSize(10)
@@ -159,7 +159,7 @@ export default function InvoicesPage() {
     // Footer
     doc.setFontSize(8)
     doc.setTextColor(148, 163, 184)
-    doc.text('This PDF document is a certified automation record of AutoFlow AI.', 105, 280, { align: 'center' })
+    doc.text('This PDF document is a certified automation record of OpsHub.', 105, 280, { align: 'center' })
     
     // Get raw base64 PDF
     const base64Pdf = doc.output('datauristring').split(',')[1]
@@ -171,7 +171,7 @@ export default function InvoicesPage() {
           <table style="width: 100%; border-collapse: collapse;">
             <tr>
               <td>
-                <h2 style="margin: 0; font-size: 22px; font-weight: 800; letter-spacing: -0.5px;">AutoFlow AI</h2>
+                <h2 style="margin: 0; font-size: 22px; font-weight: 800; letter-spacing: -0.5px;">OpsHub</h2>
                 <p style="margin: 4px 0 0 0; font-size: 11px; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; font-weight: bold;">Document Ingestion Gateway</p>
               </td>
               <td style="text-align: right; vertical-align: middle;">
@@ -230,8 +230,8 @@ export default function InvoicesPage() {
           </div>
 
           <div style="font-size: 11px; color: #94a3b8; text-align: center; border-top: 1px solid #e2e8f0; padding-top: 20px; line-height: 1.4;">
-            This is an automated operational spec document compiled by AutoFlow AI.<br>
-            © 2026 AutoFlow AI. All rights reserved.
+            This is an automated operational spec document compiled by OpsHub.<br>
+            © 2026 OpsHub. All rights reserved.
           </div>
         </div>
       </div>
@@ -245,7 +245,7 @@ export default function InvoicesPage() {
       },
       body: JSON.stringify({
         to: recipientEmail,
-        subject: `[AutoFlow Ingestion] Invoice Audit Spec & Attachment: ${selected.id}`,
+        subject: `[OpsHub Ingestion] Invoice Audit Spec & Attachment: ${selected.id}`,
         text: `Invoice Reference ${selected.id}:\nVendor ID: ${selected.vendorId}\nAmount: INR ${selected.amount.toLocaleString()}`,
         html: htmlTemplate,
         pdfBase64: base64Pdf,
@@ -316,10 +316,12 @@ export default function InvoicesPage() {
                       onClick={() => setSelected(inv)}
                       style={{ 
                         cursor: 'pointer',
-                        background: isSelected ? 'rgba(59, 130, 246, 0.06)' : 'transparent'
+                        background: isSelected ? 'rgba(59, 130, 246, 0.12)' : 'transparent',
+                        borderLeft: isSelected ? '4px solid #3b82f6' : '4px solid transparent',
+                        transition: 'all 150ms'
                       }}
                     >
-                      <td style={{ fontWeight: 700 }}>{inv.id}</td>
+                      <td style={{ fontWeight: 700, paddingLeft: isSelected ? 14 : 18 }}>{inv.id}</td>
                       <td>{inv.vendorId}</td>
                       <td>{inv.currency} {inv.amount.toLocaleString()}</td>
                       <td>

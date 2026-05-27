@@ -7,7 +7,7 @@ export function AuthProvider({ children }){
   const [user, setUser] = useState(null)
 
   useEffect(()=>{
-    const s = localStorage.getItem('autoflow_session')
+    const s = localStorage.getItem('opshub_session')
     if(s) setUser(JSON.parse(s))
   },[])
 
@@ -15,7 +15,7 @@ export function AuthProvider({ children }){
     const u = demoUsers.find(x=>x.email===email && x.password===password)
     if(u){
       const session = { ...u, token: 'mock-token-'+u.role }
-      localStorage.setItem('autoflow_session', JSON.stringify(session))
+      localStorage.setItem('opshub_session', JSON.stringify(session))
       setUser(session)
       return { ok:true }
     }
@@ -23,14 +23,14 @@ export function AuthProvider({ children }){
   }
 
   const logout = ()=>{
-    localStorage.removeItem('autoflow_session')
+    localStorage.removeItem('opshub_session')
     setUser(null)
   }
 
   const switchRole = (role)=>{
     if(!user) return
     const replaced = { ...user, role }
-    localStorage.setItem('autoflow_session', JSON.stringify(replaced))
+    localStorage.setItem('opshub_session', JSON.stringify(replaced))
     setUser(replaced)
   }
 

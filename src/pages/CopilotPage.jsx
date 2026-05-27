@@ -42,8 +42,8 @@ export default function CopilotPage() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         to: recipientEmail,
-        subject: `[AutoFlow AI] Copilot Session Audit Log`,
-        text: `AutoFlow AI Copilot session details and chain-of-thought traces:\n\n${textContent}\n\nGenerated on: ${new Date().toLocaleString()}\nVerified Operator Token Scope.`
+        subject: `[OpsHub] Copilot Session Audit Log`,
+        text: `OpsHub Copilot session details and chain-of-thought traces:\n\n${textContent}\n\nGenerated on: ${new Date().toLocaleString()}\nVerified Operator Token Scope.`
       })
     })
     .then(r => r.json())
@@ -200,7 +200,7 @@ export default function CopilotPage() {
           <div className="card" style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12 }}>
             <h4>Explainable AI Operations</h4>
             <div style={{ fontSize: 13, color: 'var(--text-secondary)', lineHeight: 1.5, flex: 1 }}>
-              <p>AutoFlow AI operates using **Explainable AI models** (XAI). Every query routed through the Copilot generates a real-time logical execution trace.</p>
+              <p>OpsHub operates using **Explainable AI models** (XAI). Every query routed through the Copilot generates a real-time logical execution trace.</p>
               <p>You can email the current session transcript directly to the Accounts Payable team for audit log archives.</p>
             </div>
             <div style={{ background: 'rgba(255, 255, 255, 0.02)', padding: 12, borderRadius: 8, border: '1px solid var(--border-light)', display: 'flex', flexDirection: 'column', gap: 8 }}>
