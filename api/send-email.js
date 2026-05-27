@@ -38,9 +38,9 @@ export default async function handler(req, res) {
 
   try {
     const mailOptions = {
-      from: `"OpsHub" <${fromEmail}>`,
+      from: `"Pierian Finance Team" <${fromEmail}>`,
       to: to || process.env.DEFAULT_RECIPIENT || 'mukeethr67@gmail.com',
-      subject: subject || 'OpsHub Notification Alert',
+      subject: subject || 'Pierian Finance Team — OpsHub Notification',
       text: text,
       html: html || text.replace(/\n/g, '<br>'),
       attachments: []

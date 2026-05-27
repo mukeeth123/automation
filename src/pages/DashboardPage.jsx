@@ -195,6 +195,73 @@ export default function DashboardPage() {
           })}
         </div>
       </motion.div>
+
+      {/* ── Pierian Finance Team Showcase Card ── */}
+      <motion.div
+        className="card"
+        style={{ marginTop: 24, background: 'linear-gradient(135deg, rgba(99,102,241,0.08) 0%, rgba(139,92,246,0.06) 100%)', border: '1px solid rgba(99,102,241,0.25)' }}
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+      >
+        <div style={{ display: 'flex', alignItems: 'flex-start', gap: 24, flexWrap: 'wrap' }}>
+          {/* Left: Title block */}
+          <div style={{ flex: '0 0 auto', maxWidth: 280 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10 }}>
+              <div style={{
+                width: 36, height: 36, borderRadius: 10,
+                background: 'linear-gradient(135deg, #6366f1, #8b5cf6)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                fontSize: 18, flexShrink: 0
+              }}>✦</div>
+              <div>
+                <div style={{ fontSize: 11, color: '#818cf8', fontWeight: 700, letterSpacing: 0.5, textTransform: 'uppercase' }}>Demo Overview</div>
+                <h4 style={{ margin: 0, fontSize: 15, color: '#fff' }}>What this demo shows for Pierian</h4>
+              </div>
+            </div>
+            <p style={{ margin: 0, fontSize: 12, color: 'var(--text-secondary)', lineHeight: 1.6 }}>
+              OpsHub is built to automate Pierian Finance Team's end-to-end accounts payable and client query workflows — from invoice ingestion to report generation.
+            </p>
+          </div>
+
+          {/* Right: Feature checklist */}
+          <div style={{ flex: 1, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 10 }}>
+            {[
+              { icon: '✅', text: 'Reduces manual invoice checking time', sub: 'AI OCR extracts & validates data instantly' },
+              { icon: '✅', text: 'Finds mismatches and duplicate risks', sub: 'Auto-flags GST errors, PO mismatches & duplicates' },
+              { icon: '✅', text: 'Creates exceptions and gets approvals', sub: 'Smart escalation to CFO / Finance Manager' },
+              { icon: '✅', text: 'Drafts follow-up emails automatically', sub: 'Signed "Regards, Pierian Finance Team"' },
+              { icon: '✅', text: 'Handles client queries with AI replies', sub: 'Context-aware drafts for all industries' },
+              { icon: '✅', text: 'Generates management reports in seconds', sub: 'Real-time analytics and exportable PDFs' },
+            ].map((f, i) => (
+              <div key={i} style={{
+                display: 'flex', gap: 10, alignItems: 'flex-start',
+                background: 'rgba(255,255,255,0.03)',
+                border: '1px solid rgba(99,102,241,0.12)',
+                borderRadius: 10, padding: '12px 14px',
+              }}>
+                <span style={{ fontSize: 16, lineHeight: 1, flexShrink: 0 }}>{f.icon}</span>
+                <div>
+                  <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-primary)', lineHeight: 1.3, marginBottom: 3 }}>{f.text}</div>
+                  <div style={{ fontSize: 11, color: 'var(--text-muted)', lineHeight: 1.4 }}>{f.sub}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Bottom tagline */}
+        <div style={{ marginTop: 16, paddingTop: 14, borderTop: '1px solid rgba(99,102,241,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
+          <span style={{ fontSize: 11, color: 'var(--text-muted)' }}>
+            All emails sent on behalf of <strong style={{ color: '#818cf8' }}>Pierian Finance Team</strong> · accounts@pierian.ai
+          </span>
+          <div style={{ display: 'flex', gap: 6 }}>
+            {['BFSI', 'Healthcare', 'Technology', 'Automotive', 'E-Commerce'].map(ind => (
+              <span key={ind} style={{ fontSize: 10, fontWeight: 600, padding: '3px 8px', borderRadius: 20, background: 'rgba(99,102,241,0.12)', border: '1px solid rgba(99,102,241,0.2)', color: '#818cf8' }}>{ind}</span>
+            ))}
+          </div>
+        </div>
+      </motion.div>
     </div>
   )
 }

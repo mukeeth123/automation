@@ -11,6 +11,7 @@ export const ROUTES = {
   COPILOT: '/copilot',
   REPORTS: '/reports',
   AUDIT: '/audit',
+  CLIENT_QUERIES: '/client-queries',
   ADMIN: '/admin',
 }
 
@@ -67,6 +68,7 @@ export const SIDEBAR_NAV = [
   { label: 'AI Copilot', route: ROUTES.COPILOT },
   { label: 'Reports', route: ROUTES.REPORTS },
   { label: 'Audit', route: ROUTES.AUDIT },
+  { label: 'Client Queries', route: ROUTES.CLIENT_QUERIES },
 ]
 
 // Admin-only sidebar items

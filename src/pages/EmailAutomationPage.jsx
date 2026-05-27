@@ -18,15 +18,16 @@ export default function EmailAutomationPage() {
 
   const getEmailBody = (email) => {
     if (!email) return ''
+    const sign = `\n\nRegards,\nPierian Finance Team\nOpsHub | accounts@pierian.ai`
     switch(email.category) {
       case 'Approval Request':
-        return `Hello Vendor Partner,\n\nThis is an automated system notification from OpsHub.\nWe have received your document for processing. Invoice details are currently under internal manager review. No immediate action is required on your side.\n\nStatus: Pending Internal Approval\nInvoice Link: https://opshub.ai/public/invoice/${email.id}\n\nBest Regards,\nAccounts Payable Team\nOpsHub`
+        return `Hello Vendor Partner,\n\nThis is an automated notification from Pierian Finance Team via OpsHub.\nWe have received your document for processing. Invoice details are currently under internal manager review. No immediate action is required on your side.\n\nStatus: Pending Internal Approval\nInvoice Link: https://opshub.ai/public/invoice/${email.id}${sign}`
       case 'Reminder':
-        return `Dear Partner,\n\nWe would like to remind you that some matching fields or tax details are incomplete. Please log into the portal to review PO Line match suggestions to expedite payment clearance.\n\nBest Regards,\nOpsHub Operations`
+        return `Dear Partner,\n\nWe noticed a mismatch between invoice amount and PO amount. Some matching fields or tax details require your attention. Please review PO Line match suggestions at your earliest to expedite payment clearance.${sign}`
       case 'Escalation':
-        return `URGENT: Transaction Conflict Warning\n\nTo Whom It May Concern,\n\nInvoice verification has failed due to a duplicate tax submission mismatch. An operator has escalated this dispute. Please provide supporting tax receipt documents as soon as possible.\n\nTicket Ref ID: AP-${email.id}`
+        return `URGENT: Transaction Conflict Warning\n\nTo Whom It May Concern,\n\nInvoice verification has failed due to a duplicate tax submission mismatch. The Pierian Finance Team has escalated this dispute. Please provide supporting tax receipt documents as soon as possible.\n\nTicket Ref ID: AP-${email.id}${sign}`
       default:
-        return `Dear Partner,\n\nWe have updated the processing timeline for your accounts payable ledger entry. The system has automatically matched this record with internal systems.\n\nThank you for your business.`
+        return `Dear Partner,\n\nWe have updated the processing timeline for your accounts payable ledger entry. The system has automatically matched this record with internal systems.\n\nKindly review and share the corrected invoice or confirmation.${sign}`
     }
   }
 
@@ -48,7 +49,7 @@ export default function EmailAutomationPage() {
     
     const next = {
       id: `EMAIL-${Date.now()}`,
-      from: 'procure@opshub.ai',
+      from: 'accounts@pierian.ai',
       to: 'vendor@partner.com',
       subject: `${cat} for INV-${invNum}`,
       status: 'Sent',
@@ -63,7 +64,7 @@ export default function EmailAutomationPage() {
       },
       body: JSON.stringify({
         to: 'mukeethr67@gmail.com',
-        subject: `[OpsHub] ${cat} for INV-${invNum}`,
+        subject: `[Pierian Finance] ${cat} for INV-${invNum}`,
         text: getEmailBody(next)
       })
     })

@@ -65,7 +65,7 @@ export default function ExceptionsPage() {
                       }}
                     >
                       <td style={{ fontWeight: 700, paddingLeft: isSelected ? 14 : 18 }}>{e.id}</td>
-                      <td>{e.vendorId}</td>
+                      <td>{e.vendorName || e.vendorId}</td>
                       <td>
                         <span className={`badge ${
                           e.duplicate ? 'badge-danger' : e.gstMismatch ? 'badge-warning' : 'badge-info'
@@ -128,6 +128,10 @@ export default function ExceptionsPage() {
                       <div style={{ fontWeight: 600, marginTop: 2 }}>{selected.vendorId}</div>
                     </div>
                     <div>
+                      <div style={{ color: 'var(--text-muted)', fontSize: 11, textTransform: 'uppercase' }}>Vendor Name</div>
+                      <div style={{ fontWeight: 600, marginTop: 2 }}>{selected.vendorName || '—'}</div>
+                    </div>
+                    <div>
                       <div style={{ color: 'var(--text-muted)', fontSize: 11, textTransform: 'uppercase' }}>Total Amount</div>
                       <div style={{ fontWeight: 600, marginTop: 2 }}>{selected.currency} {selected.amount.toLocaleString()}</div>
                     </div>
@@ -138,6 +142,10 @@ export default function ExceptionsPage() {
                     <div>
                       <div style={{ color: 'var(--text-muted)', fontSize: 11, textTransform: 'uppercase' }}>PO Reference</div>
                       <div style={{ fontWeight: 600, marginTop: 2 }}>{selected.poRef || 'No Associated PO'}</div>
+                    </div>
+                    <div style={{ gridColumn: 'span 2' }}>
+                      <div style={{ color: 'var(--text-muted)', fontSize: 11, textTransform: 'uppercase' }}>Line Item / Description</div>
+                      <div style={{ fontWeight: 600, marginTop: 2, color: '#fff' }}>{selected.description || '—'}</div>
                     </div>
                   </div>
 

@@ -88,7 +88,7 @@ export default function ReconciliationPage() {
                       }}
                     >
                       <td style={{ fontWeight: 700, paddingLeft: isSelected ? 14 : 18 }}>{i.id}</td>
-                      <td>{i.vendorId}</td>
+                      <td>{i.vendorName || i.vendorId}</td>
                       <td>{i.currency} {i.amount.toLocaleString()}</td>
                       <td>
                         <button 
@@ -162,7 +162,10 @@ export default function ReconciliationPage() {
                     style={{ display: 'flex', flexDirection: 'column', gap: 14 }}
                   >
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <div style={{ fontWeight: 800, fontSize: 16 }}>{selected.inv.id} Match Breakdown</div>
+                      <div>
+                        <div style={{ fontWeight: 800, fontSize: 16 }}>{selected.inv.id} Match Breakdown</div>
+                        <div style={{ fontSize: 12, color: 'var(--text-secondary)', marginTop: 2 }}>{selected.inv.vendorName} ({selected.inv.vendorId})</div>
+                      </div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                         <span style={{ fontSize: 12, color: 'var(--text-secondary)' }}>Score:</span>
                         <span style={{ 

@@ -17,6 +17,7 @@ import ReportsPage from './pages/ReportsPage'
 import ReconciliationPage from './pages/ReconciliationPage'
 import EmailAutomationPage from './pages/EmailAutomationPage'
 import DocumentClassificationPage from './pages/DocumentClassificationPage'
+import ClientQueryPage from './pages/ClientQueryPage'
 
 function PrivateRoute({ children }) {
   const { user, loading } = useAuth()
@@ -40,6 +41,7 @@ export default function App() {
         <Route path={ROUTES.RECONCILIATION} element={<ReconciliationPage />} />
         <Route path={ROUTES.EMAIL} element={<EmailAutomationPage />} />
         <Route path={ROUTES.CLASSIFICATION} element={<DocumentClassificationPage />} />
+        <Route path={ROUTES.CLIENT_QUERIES} element={<ClientQueryPage />} />
         <Route path={ROUTES.ADMIN} element={<AdminPage />} />
       </Route>
       <Route path="*" element={<Navigate to={ROUTES.DASHBOARD} />} />

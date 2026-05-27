@@ -62,7 +62,7 @@ export default function ApprovalsPage() {
                       }}
                     >
                       <td style={{ fontWeight: 700, paddingLeft: isSelected ? 14 : 18 }}>{i.id}</td>
-                      <td>{i.vendorId}</td>
+                      <td>{i.vendorName || i.vendorId}</td>
                       <td>{i.currency} {i.amount.toLocaleString()}</td>
                       <td>
                         <span className={`badge ${isHigh ? 'badge-danger' : 'badge-success'}`}>
@@ -123,6 +123,10 @@ export default function ApprovalsPage() {
                       <div style={{ fontWeight: 600, marginTop: 2 }}>{selected.vendorId}</div>
                     </div>
                     <div>
+                      <div style={{ color: 'var(--text-muted)', fontSize: 11, textTransform: 'uppercase' }}>Vendor Name</div>
+                      <div style={{ fontWeight: 600, marginTop: 2 }}>{selected.vendorName || '—'}</div>
+                    </div>
+                    <div>
                       <div style={{ color: 'var(--text-muted)', fontSize: 11, textTransform: 'uppercase' }}>Total Amount</div>
                       <div style={{ fontWeight: 600, marginTop: 2 }}>{selected.currency} {selected.amount.toLocaleString()}</div>
                     </div>
@@ -135,6 +139,10 @@ export default function ApprovalsPage() {
                     <div>
                       <div style={{ color: 'var(--text-muted)', fontSize: 11, textTransform: 'uppercase' }}>PO Reference</div>
                       <div style={{ fontWeight: 600, marginTop: 2 }}>{selected.poRef || 'N/A'}</div>
+                    </div>
+                    <div style={{ gridColumn: 'span 2' }}>
+                      <div style={{ color: 'var(--text-muted)', fontSize: 11, textTransform: 'uppercase' }}>Line Item / Description</div>
+                      <div style={{ fontWeight: 600, marginTop: 2, color: '#fff' }}>{selected.description || '—'}</div>
                     </div>
                   </div>
 

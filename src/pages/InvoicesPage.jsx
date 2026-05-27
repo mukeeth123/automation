@@ -83,7 +83,7 @@ export default function InvoicesPage() {
     doc.setFont('Helvetica', 'normal')
     doc.setFontSize(10)
     doc.setTextColor(100, 116, 139)
-    doc.text(`Vendor Account:  ${selected.vendorId}`, 15, 63)
+    doc.text(`Vendor:          ${selected.vendorName || selected.vendorId} (${selected.vendorId})`, 15, 63)
     doc.text(`Processed Date:  ${new Date(selected.date).toLocaleDateString()}`, 15, 69)
     doc.text(`PO Reference:    ${selected.poRef || 'N/A'}`, 15, 75)
     doc.text(`OCR Accuracy:    ${selected.confidence}% Confidence`, 15, 81)
@@ -159,7 +159,7 @@ export default function InvoicesPage() {
     // Footer
     doc.setFontSize(8)
     doc.setTextColor(148, 163, 184)
-    doc.text('This PDF document is a certified automation record of OpsHub.', 105, 280, { align: 'center' })
+    doc.text('Certified automation record — Pierian Finance Team via OpsHub.', 105, 280, { align: 'center' })
     
     // Get raw base64 PDF
     const base64Pdf = doc.output('datauristring').split(',')[1]
@@ -193,8 +193,8 @@ export default function InvoicesPage() {
               <td style="padding: 8px 0; font-weight: 700; text-align: right; color: #0f172a;">${selected.id}</td>
             </tr>
             <tr>
-              <td style="padding: 8px 0; color: #64748b;">Vendor Account Code:</td>
-              <td style="padding: 8px 0; font-weight: 700; text-align: right; color: #0f172a;">${selected.vendorId}</td>
+              <td style="padding: 8px 0; color: #64748b;">Vendor Account:</td>
+              <td style="padding: 8px 0; font-weight: 700; text-align: right; color: #0f172a;">${selected.vendorName || selected.vendorId} (${selected.vendorId})</td>
             </tr>
             <tr>
               <td style="padding: 8px 0; color: #64748b;">Associated Purchase Order (PO):</td>
@@ -215,8 +215,11 @@ export default function InvoicesPage() {
             </thead>
             <tbody>
               <tr style="border-bottom: 1px solid #f1f5f9;">
-                <td style="padding: 14px 10px; color: #334155;">Accounts Payable Ingestion lines (GST Match: ${selected.gstMismatch ? 'Tax Mismatch Discrepancy' : 'Verified OK'})</td>
-                <td style="padding: 14px 10px; text-align: right; font-weight: 700; color: #0f172a;">INR ${selected.amount.toLocaleString()}</td>
+                <td style="padding: 14px 10px; color: #334155;">
+                  <strong>${selected.description || 'Accounts Payable Ingestion lines'}</strong><br>
+                  <span style="font-size: 11px; color: #64748b; margin-top: 4px; display: inline-block;">GST Match: ${selected.gstMismatch ? 'Tax Mismatch Discrepancy' : 'Verified OK'}</span>
+                </td>
+                <td style="padding: 14px 10px; text-align: right; font-weight: 700; color: #0f172a; vertical-align: middle;">INR ${selected.amount.toLocaleString()}</td>
               </tr>
               <tr style="background-color: #f8fafc;">
                 <td style="padding: 14px 10px; font-weight: 700; color: #0f172a;">Total Payable Due</td>
@@ -230,7 +233,8 @@ export default function InvoicesPage() {
           </div>
 
           <div style="font-size: 11px; color: #94a3b8; text-align: center; border-top: 1px solid #e2e8f0; padding-top: 20px; line-height: 1.4;">
-            This is an automated operational spec document compiled by OpsHub.<br>
+            This document was compiled by OpsHub on behalf of <strong style="color:#64748b;">Pierian Finance Team</strong>.<br>
+            Regards, Pierian Finance Team &nbsp;|&nbsp; accounts@pierian.ai<br>
             © 2026 OpsHub. All rights reserved.
           </div>
         </div>
@@ -245,8 +249,8 @@ export default function InvoicesPage() {
       },
       body: JSON.stringify({
         to: recipientEmail,
-        subject: `[OpsHub Ingestion] Invoice Audit Spec & Attachment: ${selected.id}`,
-        text: `Invoice Reference ${selected.id}:\nVendor ID: ${selected.vendorId}\nAmount: INR ${selected.amount.toLocaleString()}`,
+        subject: `[Pierian Finance] Invoice Audit Spec & Attachment: ${selected.id}`,
+        text: `Invoice Reference ${selected.id}:\nVendor ID: ${selected.vendorId}\nAmount: INR ${selected.amount.toLocaleString()}\n\nRegards,\nPierian Finance Team\nOpsHub | accounts@pierian.ai`,
         html: htmlTemplate,
         pdfBase64: base64Pdf,
         filename: `invoice-spec-${selected.id}.pdf`
@@ -395,6 +399,10 @@ export default function InvoicesPage() {
                       <div style={{ fontWeight: 600, marginTop: 2 }}>{selected.vendorId}</div>
                     </div>
                     <div>
+                      <div style={{ color: 'var(--text-muted)', fontSize: 11, textTransform: 'uppercase' }}>Vendor Name</div>
+                      <div style={{ fontWeight: 600, marginTop: 2 }}>{selected.vendorName || '—'}</div>
+                    </div>
+                    <div>
                       <div style={{ color: 'var(--text-muted)', fontSize: 11, textTransform: 'uppercase' }}>Total Amount</div>
                       <div style={{ fontWeight: 600, marginTop: 2 }}>{selected.currency} {selected.amount.toLocaleString()}</div>
                     </div>
@@ -407,6 +415,10 @@ export default function InvoicesPage() {
                       <div style={{ fontWeight: 600, marginTop: 2, color: selected.confidence > 85 ? 'var(--color-success)' : 'var(--color-warning)' }}>
                         {selected.confidence}%
                       </div>
+                    </div>
+                    <div style={{ gridColumn: 'span 2' }}>
+                      <div style={{ color: 'var(--text-muted)', fontSize: 11, textTransform: 'uppercase' }}>Line Item / Description</div>
+                      <div style={{ fontWeight: 600, marginTop: 2, color: '#fff' }}>{selected.description || '—'}</div>
                     </div>
                   </div>
 
@@ -438,7 +450,7 @@ export default function InvoicesPage() {
                       onClick={emailDocument}
                       disabled={emailingDoc}
                     >
-                      {emailingDoc ? 'Emailing Document & PDF...' : 'Email HTML & PDF Invoice'}
+                      {emailingDoc ? 'Sending Invoice PDF...' : 'Send Invoice PDF'}
                     </button>
                   </div>
 
