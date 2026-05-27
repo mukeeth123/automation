@@ -64,11 +64,11 @@ export const SIDEBAR_NAV = [
   { label: 'Approvals', route: ROUTES.APPROVALS },
   { label: 'Exceptions', route: ROUTES.EXCEPTIONS },
   { label: 'Email Automation', route: ROUTES.EMAIL },
+  { label: 'Client Queries', route: ROUTES.CLIENT_QUERIES },
   { label: 'Doc Classification', route: ROUTES.CLASSIFICATION },
   { label: 'AI Copilot', route: ROUTES.COPILOT },
   { label: 'Reports', route: ROUTES.REPORTS },
   { label: 'Audit', route: ROUTES.AUDIT },
-  { label: 'Client Queries', route: ROUTES.CLIENT_QUERIES },
 ]
 
 // Admin-only sidebar items
