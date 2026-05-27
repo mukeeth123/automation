@@ -156,7 +156,8 @@
   border-bottom: 1px solid var(--border-light);
   background: rgba(6, 9, 19, 0.4);
   backdrop-filter: blur(10px);
-  z-index: 10;
+  position: relative;
+  z-index: 100;
 }
 
 .header-info h3 {
